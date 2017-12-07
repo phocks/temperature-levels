@@ -40,14 +40,15 @@ class App extends Component {
   //   );
   // }
 
-  
-
   render() {
     return (
       <section>
         <h1 class="display-1">Temperature levels</h1>
         <Time />
         <Temperature temp="really hot" />
+        <a href="#!" class="btn btn-shadow text-mono btn-primary">
+          <span class="fa fa-download mr-2" />With Icon
+        </a>
       </section>
     );
   }

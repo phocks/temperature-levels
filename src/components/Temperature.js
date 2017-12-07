@@ -6,7 +6,7 @@ class Temperature extends Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        The temperature is {this.props.temp}.
+        <p>The temperature is {this.props.temp}.</p>
       </div>
     );
   }
