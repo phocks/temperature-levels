@@ -2,6 +2,7 @@ const { h, Component } = require("preact");
 const styles = require("./App.scss");
 
 const Temperature = require("./Temperature");
+const Time = require("./Time");
 
 class App extends Component {
   // constructor(props) {
@@ -39,30 +40,13 @@ class App extends Component {
   //   );
   // }
 
-  constructor(props) {
-    super(props);
-    this.state = { date: new Date() };
-  }
-
-  componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
+  
 
   render() {
     return (
       <section>
         <h1 class="display-1">Temperature levels</h1>
-        <h1 className="display-2">It is {this.state.date.toLocaleTimeString()}.</h1>
+        <Time />
         <Temperature temp="really hot" />
       </section>
     );
