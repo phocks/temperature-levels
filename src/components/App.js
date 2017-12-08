@@ -7,6 +7,10 @@ const Button = require("./Button");
 const Form = require("./Form");
 const Age = require("./Age");
 
+const myElement = document.querySelector("body");
+
+console.log(myElement);
+
 function Spacer() {
   return (
     <div>
@@ -25,7 +29,7 @@ class App extends Component {
   }
   handleAgeChange(year) {
     console.log(year);
-    this.setState({ age: year})
+    this.setState({ age: year });
   }
   render(props, state) {
     return (

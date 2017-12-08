@@ -5,6 +5,9 @@ const styles = require("./Form.scss");
 class Form extends Component {
   constructor(props) {
     super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit(event) {
@@ -12,12 +15,18 @@ class Form extends Component {
     this.props.onAgeChange(event.target["0"].value);
   }
 
+  handleChange(event) {
+    event.preventDefault();
+    // console.log(event);
+    this.props.onAgeChange(event.target.value);
+  }
+
   render(props, state) {
     return (
       <div className={styles.wrapper}>
         <div class="card">
           <div class="card-body">
-            <form onSubmit={event => this.handleSubmit(event)}>
+            <form onSubmit={this.handleSubmit}>
               <div class="form-group">
                 <label for="exampleInputEmail1">
                   Please enter your year of birth:
@@ -28,6 +37,7 @@ class Form extends Component {
                   placeholder="Your Y.O.B."
                   type="number"
                   value={props.age}
+                  onInput={this.handleChange}
                 />
                 <small id="yearHelp" class="form-text text-muted">
                   Your age is safe with us...
