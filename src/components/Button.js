@@ -3,11 +3,20 @@ const { h, Component } = require("preact");
 const styles = require("./Button.scss");
 
 class Button extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { text: "Hello!",
+  number: 0 };
+  }
   handleClick(event) {
     event.preventDefault();
-    console.log(this);
+    this.setState({ text: "Yo!" })
+    this.setState({number: this.state.number + 1})
+    console.log(this.state.text);
   }
-  render() {
+  render(props, state) {
+    let text = state.number;
     return (
       <div className={styles.wrapper}>
         <a
@@ -15,7 +24,8 @@ class Button extends Component {
           class="btn btn-shadow text-mono btn-primary"
           onClick={event => this.handleClick(event)}
         >
-          <span class="fa fa-download mr-2" />Warm it up!
+          <span class="fa fa-download mr-2" />
+          {text}
         </a>
       </div>
     );
