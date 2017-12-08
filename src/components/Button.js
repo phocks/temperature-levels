@@ -6,14 +6,16 @@ class Button extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { text: "Hello!",
-  number: 0 };
+    this.state = {
+      text: "Hello!",
+      number: 0
+    };
   }
   handleClick(event) {
     event.preventDefault();
-    this.setState({ text: "Yo!" })
-    this.setState({number: this.state.number + 1})
-    console.log(this.state.text);
+    this.setState({ text: "Yo!" });
+    this.setState({ number: (this.state.number + 1) * 2});
+    // console.log(this.state.text);
   }
   render(props, state) {
     let text = state.number;
@@ -24,7 +26,7 @@ class Button extends Component {
           class="btn btn-shadow text-mono btn-primary"
           onClick={event => this.handleClick(event)}
         >
-          <span class="fa fa-download mr-2" />
+          <span class="fa fa-thermometer-full mr-2" />
           {text}
         </a>
       </div>
