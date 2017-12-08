@@ -3,21 +3,25 @@ const { h, Component } = require("preact");
 const styles = require("./Form.scss");
 
 class Form extends Component {
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log("Hello...");
+  }
+
   render() {
     return (
       <div className={styles.wrapper}>
         <div class="card">
           <div class="card-body">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <div class="form-group">
                 <label for="exampleInputEmail1">
-                  Please enter your date of birth:
+                  Please enter your year of birth:
                 </label>
                 <input
                   class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Your D.O.B."
+                  id="Year"
+                  placeholder="Your Y.O.B."
                   type="email"
                 />
                 <small id="emailHelp" class="form-text text-muted">
