@@ -14,7 +14,7 @@ class Button extends Component {
   handleClick(event) {
     event.preventDefault();
     this.setState({ text: "Yo!" });
-    this.setState({ number: (this.state.number + 1) * 2});
+    this.setState({ number: (this.state.number + 1) * 2 });
     // console.log(this.state.text);
   }
   render(props, state) {
