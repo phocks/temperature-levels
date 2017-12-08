@@ -3,6 +3,7 @@ const styles = require("./App.scss");
 
 const Temperature = require("./Temperature");
 const Time = require("./Time");
+const Button = require("./Button");
 
 class App extends Component {
   // constructor(props) {
@@ -46,9 +47,7 @@ class App extends Component {
         <h1 class="display-1">Temperature levels</h1>
         <Time />
         <Temperature temp="really hot" />
-        <a href="#!" class="btn btn-shadow text-mono btn-primary">
-          <span class="fa fa-download mr-2" />With Icon
-        </a>
+        <Button />
       </section>
     );
   }
