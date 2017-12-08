@@ -5,16 +5,14 @@ const styles = require("./Form.scss");
 class Form extends Component {
   constructor(props) {
     super(props);
-
-    this.state = { year: 1982 };
   }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ year: event.target["0"].value})
-    console.log(this.state.year);
+    this.props.onAgeChange(event.target["0"].value);
   }
 
-  render() {
+  render(props, state) {
     return (
       <div className={styles.wrapper}>
         <div class="card">
@@ -29,8 +27,9 @@ class Form extends Component {
                   id="Year"
                   placeholder="Your Y.O.B."
                   type="number"
+                  value={props.age}
                 />
-                <small id="emailHelp" class="form-text text-muted">
+                <small id="yearHelp" class="form-text text-muted">
                   Your age is safe with us...
                 </small>
               </div>
