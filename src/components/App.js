@@ -22,24 +22,24 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { age: "1982" };
+    this.state = { birthYear: "1982" };
     this.handleAgeChange = this.handleAgeChange.bind(this);
   }
   handleAgeChange(year) {
     console.log(year);
-    this.setState({ age: year });
+    this.setState({ birthYear: year });
   }
   render(props, state) {
     return (
       <section>
         {/* <h1 class="display-1">Temperature levels</h1> */}
-        <Time />
-        <Temperature temp="really hot" />
-        <Button />
+        {/* <Time /> */}
+        {/* <Temperature temp="really hot" /> */}
+        {/* <Button /> */}
         <Spacer />
-        <Form age={state.age} onAgeChange={this.handleAgeChange} />
+        <Form age={state.birthYear} onAgeChange={this.handleAgeChange} />
         <Spacer />
-        <Age age={state.age} />
+        <Age birthYear={state.birthYear} />
       </section>
     );
   }

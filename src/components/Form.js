@@ -39,9 +39,9 @@ class Form extends Component {
                   value={props.age}
                   onInput={this.handleChange}
                 />
-                <small id="yearHelp" class="form-text text-muted">
+                {/* <small id="yearHelp" class="form-text text-muted">
                   Your age is safe with us...
-                </small>
+                </small> */}
               </div>
               <button type="submit" class="btn btn-primary">
                 Submit
