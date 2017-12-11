@@ -20,7 +20,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { birthYear: "1942" };
+    this.state = { birthYear: "1982" };
     this.handleAgeChange = this.handleAgeChange.bind(this);
   }
   handleAgeChange(year) {
@@ -33,14 +33,13 @@ class App extends Component {
         {/* <h1 class="display-1">Temperature levels</h1> */}
         {/* <Time /> */}
         {/* <Temperature temp="really hot" /> */}
-        
-        <Spacer />
-        <Form age={state.birthYear} onAgeChange={this.handleAgeChange} />
-        <Spacer />
+
+        <Form birthYear={state.birthYear} onAgeChange={this.handleAgeChange} />
+        {/* <Spacer /> */}
         <Age birthYear={state.birthYear} />
-        <Spacer />
+        {/* <Spacer />
         <Button />
-        <Spacer />
+        <Spacer /> */}
       </section>
     );
   }
