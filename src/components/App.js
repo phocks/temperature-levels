@@ -7,8 +7,6 @@ const Button = require("./Button");
 const Form = require("./Form");
 const Age = require("./Age");
 
-
-
 function Spacer() {
   return (
     <div>
@@ -22,12 +20,12 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { birthYear: "1982" };
+    this.state = { birthYear: "1942" };
     this.handleAgeChange = this.handleAgeChange.bind(this);
   }
   handleAgeChange(year) {
     console.log(year);
-    this.setState({ birthYear: year });
+    this.setState(prevState => ({ birthYear: year }));
   }
   render(props, state) {
     return (
@@ -35,11 +33,14 @@ class App extends Component {
         {/* <h1 class="display-1">Temperature levels</h1> */}
         {/* <Time /> */}
         {/* <Temperature temp="really hot" /> */}
-        {/* <Button /> */}
+        
         <Spacer />
         <Form age={state.birthYear} onAgeChange={this.handleAgeChange} />
         <Spacer />
         <Age birthYear={state.birthYear} />
+        <Spacer />
+        <Button />
+        <Spacer />
       </section>
     );
   }

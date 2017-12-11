@@ -21,11 +21,20 @@ class Button extends Component {
 
     const myElement = document.querySelector('[name="content"');
 
-    console.log(myElement.nextElementSibling);
+    console.log(myElement.nextElementSibling.innerHTML);
 
-    setTimeout(() => {
-      myElement.nextElementSibling.innerHTML = `Now kids experience really hot temperatures.`;
-    }, 1000);
+    if (
+      myElement.nextElementSibling.innerHTML ===
+      "Now kids experience really hot temperatures."
+    ) {
+      setTimeout(() => {
+        myElement.nextElementSibling.innerHTML = `When you were young the temperature was not that hot.`;
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        myElement.nextElementSibling.innerHTML = `Now kids experience really hot temperatures.`;
+      }, 1000);
+    }
   }
 
   render(props, state) {
