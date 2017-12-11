@@ -32,7 +32,7 @@ class App extends Component {
   render(props, state) {
     return (
       <section>
-        <h1 class="display-1">Temperature levels</h1>
+        {/* <h1 class="display-1">Temperature levels</h1> */}
         <Time />
         <Temperature temp="really hot" />
         <Button />

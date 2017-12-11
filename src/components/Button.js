@@ -21,9 +21,11 @@ class Button extends Component {
 
     const myElement = document.querySelector('[name="content"');
 
-    console.log(this, myElement.nextElementSibling);
+    console.log(myElement.nextElementSibling);
 
-    myElement.nextElementSibling.innerHTML = `Now kids experience really hot temperatures.`;
+    setTimeout(() => {
+      myElement.nextElementSibling.innerHTML = `Now kids experience really hot temperatures.`;
+    }, 1000);
   }
 
   render(props, state) {
