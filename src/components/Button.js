@@ -10,13 +10,22 @@ class Button extends Component {
       text: "Hello!",
       number: 0
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
+
   handleClick(event) {
     event.preventDefault();
-    this.setState({ text: "Yo!" });
-    this.setState({ number: (this.state.number + 1) * 2 });
-    // console.log(this.state.text);
+    this.setState(prevState => ({ text: "Yo!" }));
+    this.setState(prevState => ({ number: (this.state.number + 1) * 2 }));
+
+    const myElement = document.querySelector('[name="content"');
+
+    console.log(this, myElement.nextElementSibling);
+
+    myElement.nextElementSibling.innerHTML = `Now kids experience really hot temperatures.`;
   }
+
   render(props, state) {
     let text = state.number;
     return (
@@ -24,7 +33,7 @@ class Button extends Component {
         <a
           href="#!"
           class="btn btn-shadow text-mono btn-primary"
-          onClick={event => this.handleClick(event)}
+          onClick={this.handleClick}
         >
           <span class="fa fa-thermometer-full mr-2" />
           {text}

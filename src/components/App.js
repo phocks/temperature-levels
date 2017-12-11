@@ -7,9 +7,7 @@ const Button = require("./Button");
 const Form = require("./Form");
 const Age = require("./Age");
 
-const myElement = document.querySelector("body");
 
-console.log(myElement);
 
 function Spacer() {
   return (
