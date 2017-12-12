@@ -33,9 +33,9 @@ class Age extends Component {
     const age = currentYear - birthYear;
     return (
       <div className={styles.wrapper}>
-        <span onClick={this.ageDown}>&larr; </span>
-        <span onInput={this.handleChange}>{birthYear}</span>
-        <span onClick={this.ageUp}> &rarr;</span>
+        <span className={styles.leftArrow} onClick={this.ageDown}>&lsaquo; </span>
+        <span className={styles.number} onInput={this.handleChange}>{birthYear}</span>
+        <span className={styles.rightArrow} onClick={this.ageUp}> &rsaquo;</span>
       </div>
     );
   }
