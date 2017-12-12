@@ -8,9 +8,9 @@ class Age extends Component {
     const birthYear = this.props.birthYear
     const age = currentYear - birthYear;
     return (
-      <div className={styles.wrapper}>
-        OK so you were born in <big>{birthYear}</big>. That means you are <big>{age}</big> years old.
-      </div>
+      
+        <p>OK so you were born in <big>{birthYear}</big>. That means you are <big>{age}</big> years old.</p>
+     
     );
   }
 }

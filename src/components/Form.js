@@ -22,9 +22,13 @@ class Form extends Component {
   }
 
   render(props, state) {
-    const numbers = [1, 2, 3, 4, 5];
-    const doubled = numbers.map(number => number * 2);
-    console.log(doubled);
+    const validYears = Array.from(
+      { length: 117 },
+      (dummy, startingPoint) => startingPoint + 1900
+    );
+    const birthYearOptions = validYears.map(number => (
+      <option>{number}</option>
+    ));
 
     return (
       <div className={styles.wrapper}>
@@ -33,12 +37,13 @@ class Form extends Component {
         <form onSubmit={this.handleSubmit}>
           <div class="form-group">
             {/* <label for="exampleInputEmail1">When were you born?</label> */}
-            <select class="form-control" id="sel1" value={props.birthYear} onInput={this.handleChange}>
-              <option>1981</option>
-              <option>1982</option>
-              <option>1983</option>
-              <option>1984</option>
-              <option>1985</option>
+            <select
+              class="form-control"
+              id="sel1"
+              value={props.birthYear}
+              onInput={this.handleChange}
+            >
+              {birthYearOptions}
             </select>
             {/* <input
                   class="form-control"
@@ -62,5 +67,17 @@ class Form extends Component {
     );
   }
 }
+
+// A function that gives an array of consecutive numbers
+// function range(start, stop, step) {
+//   step = step || 1;
+//   var a = [start],
+//     b = start;
+//   while (b + step < stop) {
+//     b += step;
+//     a.push(b);
+//   }
+//   return a;
+// }
 
 module.exports = Form;

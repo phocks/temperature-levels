@@ -38,7 +38,7 @@ class Button extends Component {
   }
 
   render(props, state) {
-    let text = state.number;
+    let text = "Change some text"; // state.number;
     return (
       <div className={styles.wrapper}>
         <a
