@@ -18,12 +18,10 @@ class Age extends Component {
   }
 
   ageDown() {
-    console.log("down");
     this.props.onAgeChange(this.props.birthYear - 1);
   }
 
   ageUp() {
-    console.log("up");
     this.props.onAgeChange(this.props.birthYear + 1);
   }
 
@@ -33,9 +31,16 @@ class Age extends Component {
     const age = currentYear - birthYear;
     return (
       <div className={styles.wrapper}>
-        <span className={styles.leftArrow} onClick={this.ageDown}>&lsaquo; </span>
-        <span className={styles.number} onInput={this.handleChange}>{birthYear}</span>
-        <span className={styles.rightArrow} onClick={this.ageUp}> &rsaquo;</span>
+        <span className={styles.leftArrow} onClick={this.ageDown}>
+          &lsaquo;{" "}
+        </span>
+        <span className={styles.number} onInput={this.handleChange}>
+          {birthYear}
+        </span>
+        <span className={styles.rightArrow} onClick={this.ageUp}>
+          {" "}
+          &rsaquo;
+        </span>
       </div>
     );
   }
