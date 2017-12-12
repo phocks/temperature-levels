@@ -1,3 +1,13 @@
-// .wrapper {
-//   font-size: 26px;
-// }
+.wrapper {
+  font-size: 72px;
+  text-align: center;
+
+  /* Stop double click select */
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}
