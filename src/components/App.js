@@ -33,6 +33,30 @@ class App extends Component {
     console.log(year);
     this.saveLocalSession(year);
     this.setState(prevState => ({ birthYear: year }));
+
+    const myElement = document.querySelector('[name="section1"');
+    const span = document.createElement("span");
+    span.innerHTML = year;
+    const strong = myElement.nextElementSibling.querySelector('[title="test"');
+
+    
+
+    console.log(strong, myElement.nextElementSibling.innerHTML);
+
+    strong.parentNode.replaceChild(span, strong);
+
+    // if (
+    //   myElement.nextElementSibling.innerHTML ===
+    //   "Now kids experience really hot temperatures."
+    // ) {
+    //   setTimeout(() => {
+    //     myElement.nextElementSibling.innerHTML = `When you were young the temperature was not that hot.`;
+    //   }, 1000);
+    // } else {
+    //   setTimeout(() => {
+    //     myElement.nextElementSibling.innerHTML = `Now kids experience really hot temperatures.`;
+    //   }, 1000);
+    // }
   }
 
   saveLocalSession(year) {
