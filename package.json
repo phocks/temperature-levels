@@ -26,8 +26,8 @@
     "preact-render-to-string": "^3.7.0"
   },
   "dependencies": {
-    "preact": "^8.2.6",
+    "preact": "^8.2.7",
     "preact-compat": "^3.17.0",
-    "spanify": "^1.0.0"
+    "spanify": "^1.0.5"
   }
 }
