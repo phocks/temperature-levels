@@ -35,7 +35,7 @@ class Age extends Component {
           &lsaquo;{" "}
         </span>
         <span className={styles.number} onInput={this.handleChange}>
-          {birthYear}
+          <strong>{birthYear}</strong>
         </span>
         <span className={styles.rightArrow} onClick={this.ageUp}>
           {" "}

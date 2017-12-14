@@ -1,8 +1,9 @@
 const { h, Component } = require("preact");
 const spanify = require("spanify");
 
-
 const styles = require("./App.scss");
+
+const Portal = require("preact-portal");
 
 const Temperature = require("./Temperature");
 const Time = require("./Time");
@@ -10,6 +11,7 @@ const Button = require("./Button");
 const Form = require("./Form");
 const Age = require("./Age");
 
+// I need my space - test component to delete later
 function Spacer() {
   return (
     <div>
@@ -28,18 +30,18 @@ class App extends Component {
 
     this.checkLocalStorage();
 
-    
-
     // We need to bind this to class functions sometimes
     this.handleAgeChange = this.handleAgeChange.bind(this);
+  }
+
+  componentWillMount(props) {
+    spanify.spanify();
   }
 
   handleAgeChange(year) {
     console.log(year);
     this.saveLocalSession(year);
     this.setState(prevState => ({ birthYear: year }));
-
-    spanify.spanify();
   }
 
   saveLocalSession(year) {
@@ -88,15 +90,11 @@ class App extends Component {
   render(props, state) {
     return (
       <section>
-        {/* <h1 class="display-1">Temperature levels</h1> */}
-        {/* <Time /> */}
-        {/* <Temperature temp="really hot" /> */}
-        {/* <Form birthYear={state.birthYear} onAgeChange={this.handleAgeChange} /> */}
-        {/* <Spacer /> */}
         <Age birthYear={state.birthYear} onAgeChange={this.handleAgeChange} />
-        {/* <Spacer />
-        <Button />
-        <Spacer /> */}
+        {(document.querySelector(".field").innerHTML = "")}
+        <Portal into=".field">
+          <span> in {state.birthYear}</span>
+        </Portal>
       </section>
     );
   }
@@ -113,39 +111,5 @@ function localStorageTest() {
     return false;
   }
 }
-
-// function spanify() {
-//   /*
-//    * Possibly limit it to certain paragraphs
-//    * Make it scan the hole page for now
-//    */
-//   // const myElement = document.querySelector('[name="classify"]');
-//   // const paragraph = myElement.nextElementSibling;
-
-//   const anchors = document.querySelectorAll("a");
-
-//   anchors.forEach(anchor => {
-//     if (anchor.innerHTML !== " ") return;
-
-//     const elementTitle = anchor.getAttribute("title");
-
-//     if (!elementTitle) return;
-
-//     if (elementTitle.slice(0, 3) === "end") {
-//       anchor.parentNode.removeChild(anchor);
-//       return;
-//     }
-
-//     const spanEl = document.createElement("span");
-//     spanEl.setAttribute("class", elementTitle);
-//     const spanTextEl = anchor.nextSibling;
-//     spanEl.innerHTML = spanTextEl.textContent.trim();
-
-//     anchor.parentNode.appendChild(spanEl);
-
-//     anchor.parentNode.replaceChild(spanEl, anchor);
-//     spanTextEl.parentNode.removeChild(spanTextEl);
-//   });
-// }
 
 module.exports = App;
