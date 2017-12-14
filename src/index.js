@@ -4,7 +4,6 @@ const PROJECT_NAME = "temperature-levels";
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 
 function init() {
-  console.log("init scripts...");
   const App = require("./components/App");
   render(<App projectName={PROJECT_NAME} />, root, root.firstChild);
 }

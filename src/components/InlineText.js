@@ -3,11 +3,11 @@ const { h, Component } = require('preact');
 const styles = require('./InlineText.scss');
 
 class InlineText extends Component {
-  render() {
+  render(props, state) {
     return (
-      <div className={styles.wrapper}>
-        Find me in <strong>src/components/InlineText.js</strong>
-      </div>
+      <span className={styles.wrapper}>
+        {props.text}
+      </span>
     );
   }
 }

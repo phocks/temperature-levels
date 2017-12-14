@@ -4,12 +4,14 @@ const spanify = require("spanify");
 const styles = require("./App.scss");
 
 const Portal = require("preact-portal");
+console.log(typeof Portal);
 
 const Temperature = require("./Temperature");
 const Time = require("./Time");
 const Button = require("./Button");
 const Form = require("./Form");
 const Age = require("./Age");
+const InlineText = require("./InlineText");
 
 // I need my space - test component to delete later
 function Spacer() {
@@ -91,16 +93,23 @@ class App extends Component {
     return (
       <section>
         <Age birthYear={state.birthYear} onAgeChange={this.handleAgeChange} />
-        {(document.querySelector(".field").innerHTML = "")}
-        <Portal into=".field">
-          <span> in {state.birthYear}</span>
+        {clearPortals(".portal")}
+        <Portal into=".year">
+          <InlineText text={state.birthYear} />
+        </Portal>
+        <Portal into=".heatwaves">
+          <InlineText text={state.birthYear} />
         </Portal>
       </section>
     );
   }
 }
 
-// Functions go below here
+/*
+ * Some helper functions
+ */
+
+// Returns true if Client browser supports local HTML5 storage
 function localStorageTest() {
   var test = "test";
   try {
@@ -109,6 +118,15 @@ function localStorageTest() {
     return true;
   } catch (e) {
     return false;
+  }
+}
+
+// Clears all <span class="portal"> inner HTML on the page
+function clearPortals(into) {
+  let portals = document.querySelectorAll(into), i;
+  
+  for (i = 0; i < portals.length; ++i) {
+    portals[i].innerHTML = "";
   }
 }
 
