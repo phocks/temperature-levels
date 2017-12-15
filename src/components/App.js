@@ -39,7 +39,7 @@ class App extends Component {
   componentWillMount(props) {
     // Convert CoreMedia a tags to spans
     spanify.spanify();
-    spanify.divify();
+    spanify.hashify();
 
     // Clear the innerHTML of all portals
     clearPortals(".portal");
