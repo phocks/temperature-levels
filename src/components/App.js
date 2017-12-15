@@ -6,12 +6,13 @@ const styles = require("./App.scss");
 const Portal = require("preact-portal");
 console.log(typeof Portal);
 
-const Temperature = require("./Temperature");
-const Time = require("./Time");
-const Button = require("./Button");
-const Form = require("./Form");
-const Age = require("./Age");
-const InlineText = require("./InlineText");
+const Temperature = require("./Temperature"),
+  Time = require("./Time"),
+  Button = require("./Button"),
+  Form = require("./Form"),
+  Age = require("./Age"),
+  InlineText = require("./InlineText"),
+  Container = require("./Container");
 
 // I need my space - test component to delete later
 function Spacer() {
@@ -37,7 +38,15 @@ class App extends Component {
   }
 
   componentWillMount(props) {
+    // Convert CoreMedia a tags to spans
     spanify.spanify();
+
+    // Clear the innerHTML of all portals
+    clearPortals(".portal");
+  }
+
+  componentDidMount() {
+    console.log("App mounted...");
   }
 
   handleAgeChange(year) {
@@ -93,12 +102,14 @@ class App extends Component {
     return (
       <section>
         <Age birthYear={state.birthYear} onAgeChange={this.handleAgeChange} />
-        {clearPortals(".portal")}
         <Portal into=".year">
           <InlineText text={state.birthYear} />
         </Portal>
         <Portal into=".heatwaves">
-          <InlineText text={state.birthYear} />
+          <InlineText text={Math.floor(state.birthYear * 0.1323)} />
+        </Portal>
+        <Portal into="[name=&quot;container&quot;]">
+          <Container />
         </Portal>
       </section>
     );
@@ -107,7 +118,7 @@ class App extends Component {
 
 /*
  * Some helper functions
- */
+ ***********************/
 
 // Returns true if Client browser supports local HTML5 storage
 function localStorageTest() {
@@ -123,9 +134,10 @@ function localStorageTest() {
 
 // Clears all <span class="portal"> inner HTML on the page
 function clearPortals(into) {
-  let portals = document.querySelectorAll(into), i;
-  
-  for (i = 0; i < portals.length; ++i) {
+  let portals = document.querySelectorAll(into),
+    i;
+
+  for (i = 0; i < portals.length; i++) {
     portals[i].innerHTML = "";
   }
 }
