@@ -1,5 +1,5 @@
 const { h, Component } = require("preact");
-const spanify = require("../lib/spanify");
+const spanify = require("spanify");
 
 const styles = require("./App.scss");
 
@@ -110,6 +110,9 @@ class App extends Component {
         </Portal>
         <Portal into=".container">
           <Container />
+        </Portal>
+        <Portal into=".currentAge">
+          {2017 - state.birthYear}
         </Portal>
       </section>
     );
