@@ -1,10 +1,9 @@
 const { h, Component } = require("preact");
-const spanify = require("spanify");
+const spanify = require("../lib/spanify");
 
 const styles = require("./App.scss");
 
 const Portal = require("preact-portal");
-console.log(typeof Portal);
 
 const Temperature = require("./Temperature"),
   Time = require("./Time"),
@@ -40,6 +39,7 @@ class App extends Component {
   componentWillMount(props) {
     // Convert CoreMedia a tags to spans
     spanify.spanify();
+    spanify.divify();
 
     // Clear the innerHTML of all portals
     clearPortals(".portal");
@@ -108,7 +108,7 @@ class App extends Component {
         <Portal into=".heatwaves">
           <InlineText text={Math.floor(state.birthYear * 0.1323)} />
         </Portal>
-        <Portal into="[name=&quot;container&quot;]">
+        <Portal into=".container">
           <Container />
         </Portal>
       </section>
