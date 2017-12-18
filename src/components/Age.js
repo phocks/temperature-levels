@@ -6,15 +6,22 @@ class Age extends Component {
   constructor(props) {
     super(props);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.ageDown = this.ageDown.bind(this);
-    this.ageUp = this.ageUp.bind(this);
+    // this.state = {
+    //   originalMousePosX: 0,
+    //   originalMousePosY: 0
+    // };
   }
 
-  handleChange(event) {
-    event.preventDefault();
+  // handleChange(event) {
+  //   event.preventDefault();
+  //   console.log(event);
+  //   this.props.onAgeChange(event.target.innerText);
+  // }
+
+  handleMouseDown(event) {
     console.log(event);
-    this.props.onAgeChange(event.target.innerText);
+    console.log(this.props.mousePosX, this.props.mousePosY);
+    this.props.onSlideYear(event);
   }
 
   ageDown() {
@@ -31,13 +38,16 @@ class Age extends Component {
     const age = currentYear - birthYear;
     return (
       <div className={styles.wrapper}>
-        <span className={styles.leftArrow} onClick={this.ageDown}>
+        <span className={styles.leftArrow} onClick={this.ageDown.bind(this)}>
           &lsaquo;{" "}
         </span>
-        <span className={styles.number} onInput={this.handleChange}>
+        <span
+          className={styles.number}
+          onMouseDown={this.handleMouseDown.bind(this)}
+        >
           <strong>{birthYear}</strong>
         </span>
-        <span className={styles.rightArrow} onClick={this.ageUp}>
+        <span className={styles.rightArrow} onClick={this.ageUp.bind(this)}>
           {" "}
           &rsaquo;
         </span>
