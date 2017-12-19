@@ -34,7 +34,7 @@ class App extends Component {
       mousePosY: 0,
       originalmousePosX: 0,
       originalmousePosY: 0,
-      mouseIsDown: true
+      mouseIsDown: false
     };
 
     // We need to bind this to class functions sometimes
@@ -58,7 +58,7 @@ class App extends Component {
   }
 
   handleAgeChange(year) {
-    console.log(year);
+    // console.log(year);
     this.saveLocalSession(year);
     this.setState(prevState => ({ birthYear: year }));
   }
@@ -79,7 +79,13 @@ class App extends Component {
     }));
     if (this.state.mouseIsDown) {
       console.log(this.state.mousePosX - this.state.originalmousePosX);
+      this.handleAgeChange(this.state.birthYear + (this.state.mousePosX - this.state.originalmousePosX));
     }
+    this.setState(prevState => ({
+      originalmousePosX: event.screenX,
+      originalmousePosY: event.screenY
+    }));
+    
   }
 
   handleStopSliding(event) {
