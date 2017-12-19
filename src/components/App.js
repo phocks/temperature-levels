@@ -69,7 +69,7 @@ class App extends Component {
       originalmousePosX: event.screenX,
       originalmousePosY: event.screenY,
       mouseIsDown: true
-    }))
+    }));
   }
 
   handleMouseMove(event) {
@@ -80,6 +80,12 @@ class App extends Component {
     if (this.state.mouseIsDown) {
       console.log(this.state.mousePosX - this.state.originalmousePosX);
     }
+  }
+
+  handleStopSliding(event) {
+    this.setState(prevState => ({
+      mouseIsDown: false
+    }));
   }
 
   saveLocalSession(year) {
@@ -104,7 +110,11 @@ class App extends Component {
 
   render(props, state) {
     return (
-      <section onMouseMove={this.handleMouseMove.bind(this)}>
+      <section
+        onMouseMove={this.handleMouseMove.bind(this)}
+        onMouseLeave={this.handleStopSliding.bind(this)}
+        onMouseUp={this.handleStopSliding.bind(this)}
+      >
         <Age
           birthYear={state.birthYear}
           mousePosX={state.mousePosX}
