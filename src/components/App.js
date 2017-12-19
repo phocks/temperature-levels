@@ -33,7 +33,8 @@ class App extends Component {
       mousePosX: 0,
       mousePosY: 0,
       originalmousePosX: 0,
-      originalmousePosY: 0
+      originalmousePosY: 0,
+      mouseIsDown: true
     };
 
     // We need to bind this to class functions sometimes
@@ -66,7 +67,8 @@ class App extends Component {
     console.log("mousedowned");
     this.setState(prevState => ({
       originalmousePosX: event.screenX,
-      originalmousePosY: event.screenY
+      originalmousePosY: event.screenY,
+      mouseIsDown: true
     }))
   }
 
@@ -75,7 +77,9 @@ class App extends Component {
       mousePosX: event.screenX,
       mousePosY: event.screenY
     }));
-    console.log(this.state.mousePosX - this.state.originalmousePosX);
+    if (this.state.mouseIsDown) {
+      console.log(this.state.mousePosX - this.state.originalmousePosX);
+    }
   }
 
   saveLocalSession(year) {
