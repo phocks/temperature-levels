@@ -77,15 +77,22 @@ class App extends Component {
       mousePosX: event.screenX,
       mousePosY: event.screenY
     }));
-    if (this.state.mouseIsDown) {
-      console.log(this.state.mousePosX - this.state.originalmousePosX);
-      this.handleAgeChange(this.state.birthYear + (this.state.mousePosX - this.state.originalmousePosX));
+
+    const sensitivity = 2;
+
+    const distance = this.state.mousePosX - this.state.originalmousePosX;
+
+    if (this.state.mouseIsDown && Math.abs(distance) > sensitivity) {
+      // console.log();
+      this.handleAgeChange(
+        Math.round(this.state.birthYear + distance / sensitivity)
+      );
+
+      this.setState(prevState => ({
+        originalmousePosX: event.screenX,
+        originalmousePosY: event.screenY
+      }));
     }
-    this.setState(prevState => ({
-      originalmousePosX: event.screenX,
-      originalmousePosY: event.screenY
-    }));
-    
   }
 
   handleStopSliding(event) {
