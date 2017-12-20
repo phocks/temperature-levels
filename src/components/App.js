@@ -122,6 +122,7 @@ class App extends Component {
   }
 
   render(props, state) {
+    console.log(styles);
     return (
       <section
         onMouseMove={this.handleMouseMove.bind(this)}
