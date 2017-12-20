@@ -5,13 +5,15 @@ const styles = require("./App.scss");
 
 const Portal = require("preact-portal");
 
+// Import all the Components
 const Temperature = require("./Temperature"),
   Time = require("./Time"),
   Button = require("./Button"),
   Form = require("./Form"),
   Age = require("./Age"),
   InlineText = require("./InlineText"),
-  Container = require("./Container");
+  Container = require("./Container"),
+  GeoLocation = require("./GeoLocation");
 
 // I need my space - test component to delete later
 function Spacer() {
@@ -46,8 +48,8 @@ class App extends Component {
     this.checkLocalStorage();
 
     // Convert CoreMedia a tags to spans
-    spanify.spanify({defaultClass: "portal"});
-    spanify.hashify({defaultClass: "u-full"});
+    spanify.spanify({ defaultClass: "portal" });
+    spanify.hashify({ defaultClass: "u-full" });
 
     // Clear the innerHTML of all portals
     clearPortals(".portal");
@@ -142,7 +144,11 @@ class App extends Component {
         <Portal into=".container">
           <Time />
         </Portal>
-        <Portal into=".currentAge">{2017 - state.birthYear}</Portal>
+        <Portal into=".currentAge">{String(2017 - state.birthYear)}</Portal>
+        <Portal into=".age-in-1983">{String(1983 - state.birthYear)}</Portal>
+        <Portal into=".geolocation">
+          <GeoLocation />
+        </Portal>
       </section>
     );
   }
