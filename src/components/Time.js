@@ -25,7 +25,7 @@ class Time extends Component {
     return (
       <div className={styles.wrapper}>
         <h1 className="display-2">
-          It is {this.state.date.toLocaleTimeString()}.
+          <center>It is {this.state.date.toLocaleTimeString()}.</center>
         </h1>
       </div>
     );

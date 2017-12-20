@@ -46,8 +46,8 @@ class App extends Component {
     this.checkLocalStorage();
 
     // Convert CoreMedia a tags to spans
-    spanify.spanify();
-    spanify.hashify();
+    spanify.spanify({defaultClass: "portal"});
+    spanify.hashify({defaultClass: "u-full"});
 
     // Clear the innerHTML of all portals
     clearPortals(".portal");
@@ -58,7 +58,6 @@ class App extends Component {
   }
 
   handleAgeChange(year) {
-    // console.log(year);
     this.saveLocalSession(year);
     this.setState(prevState => ({ birthYear: year }));
   }
@@ -78,12 +77,11 @@ class App extends Component {
       mousePosY: event.screenY
     }));
 
-    const sensitivity = 2;
-
+    const sensitivity = 5;
     const distance = this.state.mousePosX - this.state.originalmousePosX;
 
     if (this.state.mouseIsDown && Math.abs(distance) > sensitivity) {
-      // console.log();
+      console.log(distance);
       this.handleAgeChange(
         Math.round(this.state.birthYear + distance / sensitivity)
       );
