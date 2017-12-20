@@ -52,7 +52,7 @@ class App extends Component {
     spanify.hashify({ defaultClass: "u-full" });
 
     // Clear the innerHTML of all portals
-    clearPortals(".portal");
+    clearPortals(".portal-remove");
   }
 
   componentDidMount() {

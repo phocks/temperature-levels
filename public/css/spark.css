@@ -1,0 +1,8 @@
+@font-face {
+  font-family: Spark;
+  src: url("../Spark - Dot-line - Medium.otf") format("opentype");
+}
+
+.spark {
+  font-family: Spark;
+}
