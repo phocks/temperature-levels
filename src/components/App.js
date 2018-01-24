@@ -1,9 +1,14 @@
 const { h, Component } = require("preact");
 const spanify = require("spanify");
+// const axios = require("axios");
 
 const styles = require("./App.scss");
 
 const Portal = require("preact-portal");
+
+// Directly import data for now
+const data = require("../monthly_global_temps_json.json");
+console.log(data);
 
 // Import all the Components
 const Temperature = require("./Temperature"),
@@ -15,15 +20,7 @@ const Temperature = require("./Temperature"),
   Container = require("./Container"),
   GeoLocation = require("./GeoLocation");
 
-// I need my space - test component to delete later
-function Spacer() {
-  return (
-    <div>
-      <br />
-      <br />
-    </div>
-  );
-}
+let calculatedBirthEra = "nineties";
 
 class App extends Component {
   constructor(props) {
@@ -60,19 +57,46 @@ class App extends Component {
     console.log("App mounted...");
   }
 
+  componentDidUpdate() {
+    // console.log("updated");
+  }
+
   handleAgeChange(year) {
     // Set some bounds on the birth year
     if (year < 1900) year = 1900;
     if (year > 2018) year = 2018;
+
+    // Set Era age brackets
+    let allEras = "noughties nineties eighties seventies boomers";
+
+    if (year >= 2000) calculatedBirthEra = "noughties";
+    else if (year >= 1990) calculatedBirthEra = "nineties";
+    else if (year >= 1980) calculatedBirthEra = "eighties";
+    else if (year >= 1970) calculatedBirthEra = "seventies";
+    else calculatedBirthEra = "boomers";
+
     this.saveLocalSession(year);
+    this.setState({ birthYear: year }, () => {});
+
     this.setState(
-      prevState => ({ birthYear: year }),
+      {
+        birthEra: calculatedBirthEra
+      },
       () => {
-        // __ODYSSEY__.utils.anchors
-        //   .getSections(["eighties"])
-        //   .forEach(sections => {
-        //     console.log("Eighties!!!");
-        //   });
+        console.log(this.state.birthEra);
+
+        let allEraEls = document.querySelectorAll(".noughties, .nineties, .eighties, .seventies, .boomers");
+        console.log(allEraEls);
+        for (let i = 0; i < allEraEls.length; i++) {
+          removeClass(allEraEls[i], "show");
+        }
+
+        let era = document.getElementsByClassName(this.state.birthEra);
+        console.log(era);
+
+        for (let i = 0; i < era.length; i++) {
+          addClass(era[i], "show");
+        }
       }
     );
   }
@@ -97,7 +121,7 @@ class App extends Component {
       const distance = this.state.mousePosX - this.state.originalmousePosX;
 
       if (Math.abs(distance) > sensitivity) {
-        console.log(distance);
+        // console.log(distance);
         this.handleAgeChange(
           Math.round(this.state.birthYear + distance / sensitivity)
         );
@@ -222,6 +246,27 @@ function setCookie(cname, cvalue, exdays) {
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
   var expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+// For manipulating classes
+function hasClass(el, className) {
+  return el.classList
+    ? el.classList.contains(className)
+    : new RegExp("\\b" + className + "\\b").test(el.className);
+}
+
+function addClass(el, className) {
+  if (el.classList) el.classList.add(className);
+  else if (!hasClass(el, className)) el.className += " " + className;
+}
+
+function removeClass(el, className) {
+  if (el.classList) el.classList.remove(className);
+  else
+    el.className = el.className.replace(
+      new RegExp("\\b" + className + "\\b", "g"),
+      ""
+    );
 }
 
 module.exports = App;

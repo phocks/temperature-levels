@@ -25,4 +25,12 @@
     background: yellow;
     padding: 0 2px;
   }
+
+  .noughties, .nineties, .eighties, .seventies, .boomers {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
 }

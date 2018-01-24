@@ -26,6 +26,7 @@
     "preact-render-to-string": "^3.7.0"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "preact": "^8.2.7",
     "preact-compat": "^3.18.0",
     "preact-portal": "^1.1.2",
