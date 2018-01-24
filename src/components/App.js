@@ -32,6 +32,7 @@ class App extends Component {
     // set some default states
     this.state = {
       birthYear: 1999,
+      birthEra: "eighties",
       mousePosX: 0,
       mousePosY: 0,
       originalmousePosX: 0,
@@ -49,7 +50,7 @@ class App extends Component {
 
     // Convert CoreMedia a tags to spans
     spanify.spanify({ defaultClass: "portal" });
-    spanify.hashify({ defaultClass: "u-full" });
+    spanify.hashify({ defaultClass: "u-full", hashList: ["birthyearselect"] });
 
     // Clear the innerHTML of all portals
     clearPortals(".portal-remove");
@@ -60,8 +61,20 @@ class App extends Component {
   }
 
   handleAgeChange(year) {
+    // Set some bounds on the birth year
+    if (year < 1900) year = 1900;
+    if (year > 2018) year = 2018;
     this.saveLocalSession(year);
-    this.setState(prevState => ({ birthYear: year }));
+    this.setState(
+      prevState => ({ birthYear: year }),
+      () => {
+        // __ODYSSEY__.utils.anchors
+        //   .getSections(["eighties"])
+        //   .forEach(sections => {
+        //     console.log("Eighties!!!");
+        //   });
+      }
+    );
   }
 
   handleSlideYear(event) {
