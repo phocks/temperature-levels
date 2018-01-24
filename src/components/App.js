@@ -11,14 +11,7 @@ const data = require("../monthly_global_temps_json.json");
 console.log(data);
 
 // Import all the Components
-const Temperature = require("./Temperature"),
-  Time = require("./Time"),
-  Button = require("./Button"),
-  Form = require("./Form"),
-  Age = require("./Age"),
-  InlineText = require("./InlineText"),
-  Container = require("./Container"),
-  GeoLocation = require("./GeoLocation");
+const Age = require("./Age");
 
 let calculatedBirthEra = "nineties";
 
@@ -36,9 +29,6 @@ class App extends Component {
       originalmousePosY: 0,
       mouseIsDown: false
     };
-
-    // We need to bind this to class functions sometimes
-    // this.handleAgeChange = this.handleAgeChange.bind(this);
   }
 
   componentWillMount() {
@@ -58,7 +48,6 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    // console.log("updated");
   }
 
   handleAgeChange(year) {
@@ -105,7 +94,6 @@ class App extends Component {
   }
 
   handleSlideYear(event) {
-    // console.log("mousedowned");
     this.setState(prevState => ({
       originalmousePosX: event.screenX,
       originalmousePosY: event.screenY,
@@ -124,7 +112,6 @@ class App extends Component {
       const distance = this.state.mousePosX - this.state.originalmousePosX;
 
       if (Math.abs(distance) > sensitivity) {
-        // console.log(distance);
         this.handleAgeChange(
           Math.round(this.state.birthYear + distance / sensitivity)
         );
@@ -183,20 +170,6 @@ class App extends Component {
             />
           </section>
         </Portal>
-        {/* <Portal into=".year">
-          <InlineText text={state.birthYear} />
-        </Portal>
-        <Portal into=".heatwaves">
-          <InlineText text={Math.floor(state.birthYear * 0.1323)} />
-        </Portal>
-        <Portal into=".container">
-          <Time />
-        </Portal>
-        <Portal into=".currentAge">{String(2017 - state.birthYear)}</Portal>
-        <Portal into=".age-in-1983">{String(1983 - state.birthYear)}</Portal>
-        <Portal into=".geolocation">
-          <GeoLocation />
-        </Portal> */}
       </section>
     );
   }
