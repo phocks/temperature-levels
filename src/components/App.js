@@ -65,7 +65,7 @@ class App extends Component {
   }
 
   handleSlideYear(event) {
-    console.log("mousedowned");
+    // console.log("mousedowned");
     this.setState(prevState => ({
       originalmousePosX: event.screenX,
       originalmousePosY: event.screenY,
@@ -74,31 +74,35 @@ class App extends Component {
   }
 
   handleMouseMove(event) {
-    this.setState(prevState => ({
-      mousePosX: event.screenX,
-      mousePosY: event.screenY
-    }));
-
-    const sensitivity = 5;
-    const distance = this.state.mousePosX - this.state.originalmousePosX;
-
-    if (this.state.mouseIsDown && Math.abs(distance) > sensitivity) {
-      console.log(distance);
-      this.handleAgeChange(
-        Math.round(this.state.birthYear + distance / sensitivity)
-      );
-
+    if (this.state.mouseIsDown) {
       this.setState(prevState => ({
-        originalmousePosX: event.screenX,
-        originalmousePosY: event.screenY
+        mousePosX: event.screenX,
+        mousePosY: event.screenY
       }));
+
+      const sensitivity = 5;
+      const distance = this.state.mousePosX - this.state.originalmousePosX;
+
+      if (Math.abs(distance) > sensitivity) {
+        console.log(distance);
+        this.handleAgeChange(
+          Math.round(this.state.birthYear + distance / sensitivity)
+        );
+
+        this.setState(prevState => ({
+          originalmousePosX: event.screenX,
+          originalmousePosY: event.screenY
+        }));
+      }
     }
   }
 
   handleStopSliding(event) {
-    this.setState(prevState => ({
-      mouseIsDown: false
-    }));
+    if (this.state.mouseIsDown) {
+      this.setState(prevState => ({
+        mouseIsDown: false
+      }));
+    }
   }
 
   saveLocalSession(year) {
@@ -122,21 +126,24 @@ class App extends Component {
   }
 
   render(props, state) {
-    console.log(styles);
     return (
-      <section
-        onMouseMove={this.handleMouseMove.bind(this)}
-        onMouseLeave={this.handleStopSliding.bind(this)}
-        onMouseUp={this.handleStopSliding.bind(this)}
-      >
-        <Age
-          birthYear={state.birthYear}
-          mousePosX={state.mousePosX}
-          mousePosY={state.mousePosY}
-          onAgeChange={this.handleAgeChange.bind(this)}
-          onSlideYear={this.handleSlideYear.bind(this)}
-        />
-        <Portal into=".year">
+      <section className={styles.wrapper}>
+        <Portal into=".birthyearselect">
+          <section
+            onMouseMove={this.handleMouseMove.bind(this)}
+            onMouseLeave={this.handleStopSliding.bind(this)}
+            onMouseUp={this.handleStopSliding.bind(this)}
+          >
+            <Age
+              birthYear={state.birthYear}
+              mousePosX={state.mousePosX}
+              mousePosY={state.mousePosY}
+              onAgeChange={this.handleAgeChange.bind(this)}
+              onSlideYear={this.handleSlideYear.bind(this)}
+            />
+          </section>
+        </Portal>
+        {/* <Portal into=".year">
           <InlineText text={state.birthYear} />
         </Portal>
         <Portal into=".heatwaves">
@@ -149,7 +156,7 @@ class App extends Component {
         <Portal into=".age-in-1983">{String(1983 - state.birthYear)}</Portal>
         <Portal into=".geolocation">
           <GeoLocation />
-        </Portal>
+        </Portal> */}
       </section>
     );
   }

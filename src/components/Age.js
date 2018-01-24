@@ -1,4 +1,5 @@
 const { h, Component } = require("preact");
+const Portal = require("preact-portal");
 
 const styles = require("./Age.scss");
 
@@ -19,7 +20,7 @@ class Age extends Component {
   // }
 
   handleMouseDown(event) {
-    console.log(event);
+    // console.log(event);
     console.log(this.props.mousePosX, this.props.mousePosY);
     this.props.onSlideYear(event);
   }
@@ -37,21 +38,23 @@ class Age extends Component {
     const birthYear = this.props.birthYear;
     const age = currentYear - birthYear;
     return (
-      <div className={styles.wrapper}>
-        <span className={styles.leftArrow} onClick={this.ageDown.bind(this)}>
-          &lsaquo;{" "}
-        </span>
-        <span
-          className={styles.number}
-          onMouseDown={this.handleMouseDown.bind(this)}
-        >
-          <strong>{birthYear}</strong>
-        </span>
-        <span className={styles.rightArrow} onClick={this.ageUp.bind(this)}>
-          {" "}
-          &rsaquo;
-        </span>
-      </div>
+      
+        <div className={styles.wrapper}>
+          <span className={styles.leftArrow} onClick={this.ageDown.bind(this)}>
+            &lsaquo;{" "}
+          </span>
+          <span
+            className={styles.number}
+            onMouseDown={this.handleMouseDown.bind(this)}
+          >
+            <strong>{birthYear}</strong>
+          </span>
+          <span className={styles.rightArrow} onClick={this.ageUp.bind(this)}>
+            {" "}
+            &rsaquo;
+          </span>
+        </div>
+    
     );
   }
 }
