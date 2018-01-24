@@ -73,6 +73,7 @@ class App extends Component {
     else if (year >= 1990) calculatedBirthEra = "nineties";
     else if (year >= 1980) calculatedBirthEra = "eighties";
     else if (year >= 1970) calculatedBirthEra = "seventies";
+    else if (year >= 1960) calculatedBirthEra = "sixties";
     else calculatedBirthEra = "boomers";
 
     this.saveLocalSession(year);

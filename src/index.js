@@ -7,7 +7,7 @@ const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 // Fetch html from Gist and inject in page
 axios
   .get(
-    "https://rawgit.com/TLes/8256d53cb369f0f7a1d98c02d3271673/raw/01f877a881336e5efa47fb422dca1485817aa243/gistfile1.txt"
+    "https://raw.githubusercontent.com/TLes/temprecord/master/script.html"
   )
   .then(response => {
     const injectHtml = response.data;
