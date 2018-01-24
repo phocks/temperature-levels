@@ -67,8 +67,6 @@ class App extends Component {
     if (year > 2018) year = 2018;
 
     // Set Era age brackets
-    let allEras = "noughties nineties eighties seventies boomers";
-
     if (year >= 2000) calculatedBirthEra = "noughties";
     else if (year >= 1990) calculatedBirthEra = "nineties";
     else if (year >= 1980) calculatedBirthEra = "eighties";
@@ -86,12 +84,16 @@ class App extends Component {
       () => {
         console.log(this.state.birthEra);
 
-        let allEraEls = document.querySelectorAll(".noughties, .nineties, .eighties, .seventies, .boomers");
+        // Go through and hide all again
+        let allEraEls = document.querySelectorAll(
+          ".noughties, .nineties, .eighties, .seventies, .sixties, .boomers"
+        );
         console.log(allEraEls);
         for (let i = 0; i < allEraEls.length; i++) {
           removeClass(allEraEls[i], "show");
         }
 
+        // Go through and show the ones we want
         let era = document.getElementsByClassName(this.state.birthEra);
         console.log(era);
 
