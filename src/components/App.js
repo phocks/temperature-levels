@@ -7,8 +7,8 @@ const styles = require("./App.scss");
 const Portal = require("preact-portal");
 
 // Directly import data for now
-const data = require("../monthly_global_temps_json.json");
-console.log(data);
+const monthlyGlobalTemps = require("../monthly_global_temps_json.json");
+console.log(monthlyGlobalTemps);
 
 // Import all the Components
 const Age = require("./Age");
@@ -47,8 +47,7 @@ class App extends Component {
     console.log("App mounted...");
   }
 
-  componentDidUpdate() {
-  }
+  componentDidUpdate() {}
 
   handleAgeChange(year) {
     // Set some bounds on the birth year
@@ -64,31 +63,15 @@ class App extends Component {
     else calculatedBirthEra = "boomers";
 
     this.saveLocalSession(year);
-    this.setState({ birthYear: year }, () => {});
 
+    // Set state to component
     this.setState(
       {
+        birthYear: year,
         birthEra: calculatedBirthEra
       },
       () => {
-        console.log(this.state.birthEra);
-
-        // Go through and hide all again
-        let allEraEls = document.querySelectorAll(
-          ".noughties, .nineties, .eighties, .seventies, .sixties, .boomers"
-        );
-        console.log(allEraEls);
-        for (let i = 0; i < allEraEls.length; i++) {
-          removeClass(allEraEls[i], "show");
-        }
-
-        // Go through and show the ones we want
-        let era = document.getElementsByClassName(this.state.birthEra);
-        console.log(era);
-
-        for (let i = 0; i < era.length; i++) {
-          addClass(era[i], "show");
-        }
+        this.flowContent();
       }
     );
   }
@@ -150,6 +133,42 @@ class App extends Component {
         this.setState(prevState => ({ birthYear: +getCookie("birthYear") }));
       }
     }
+  }
+
+  flowContent() {
+    // Go through and hide all again
+    let allEraEls = document.querySelectorAll(
+      ".noughties, .nineties, .eighties, .seventies, .sixties, .boomers"
+    );
+    for (let i = 0; i < allEraEls.length; i++) {
+      removeClass(allEraEls[i], "show");
+    }
+
+    // Go through and show the ones we want
+    let era = document.getElementsByClassName(this.state.birthEra);
+
+    for (let i = 0; i < era.length; i++) {
+      addClass(era[i], "show");
+    }
+
+    // Find the mean temperature from the data
+    let mean = 0;
+    let aboveBelow = "above";
+
+    let currentTempRecord = monthlyGlobalTemps.find(temp => {
+      return temp.Date === this.state.birthYear + "-01-08";
+    });
+
+    if (currentTempRecord) {
+      mean = Math.abs(currentTempRecord.Mean);
+      if (currentTempRecord.Mean < 0) aboveBelow = "below";
+      else aboveBelow = "above";
+    } else mean = "(no data)";
+
+    document.querySelector(".mean-year").innerHTML = mean;
+    document.querySelector(".above-below").innerHTML = aboveBelow;
+
+    console.log(mean);
   }
 
   render(props, state) {
