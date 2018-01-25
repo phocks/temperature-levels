@@ -45,6 +45,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log("App mounted...");
+    this.flowContent();
   }
 
   componentDidUpdate() {}
@@ -160,13 +161,18 @@ class App extends Component {
     });
 
     if (currentTempRecord) {
+      // Make positive number
       mean = Math.abs(currentTempRecord.Mean);
+
+      // Adjust above or below accordingly
       if (currentTempRecord.Mean < 0) aboveBelow = "below";
       else aboveBelow = "above";
     } else mean = "(no data)";
 
+    // Search out classes is change HTML content
     document.querySelector(".mean-year").innerHTML = mean;
     document.querySelector(".above-below").innerHTML = aboveBelow;
+    document.querySelector(".minus-birth-year-2010").innerHTML = 2010 - this.state.birthYear;
 
     console.log(mean);
   }
