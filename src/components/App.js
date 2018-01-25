@@ -53,10 +53,11 @@ class App extends Component {
   handleAgeChange(year) {
     // Set some bounds on the birth year
     if (year < 1900) year = 1900;
-    if (year > 2018) year = 2018;
+    if (year > 2016) year = 2016;
 
     // Set Era age brackets
-    if (year >= 2000) calculatedBirthEra = "noughties";
+    if (year >= 2010) calculatedBirthEra = "tens";
+    else if (year >= 2000) calculatedBirthEra = "noughties";
     else if (year >= 1990) calculatedBirthEra = "nineties";
     else if (year >= 1980) calculatedBirthEra = "eighties";
     else if (year >= 1970) calculatedBirthEra = "seventies";
