@@ -3,7 +3,6 @@ const spanify = require("spanify");
 // const axios = require("axios");
 
 const styles = require("./App.scss");
-
 const Portal = require("preact-portal");
 
 // Directly import data for now
@@ -171,9 +170,9 @@ class App extends Component {
     } else mean = "(no data)";
 
     // Search out classes is change HTML content
-    document.querySelector(".mean-year").innerHTML = mean;
-    document.querySelector(".above-below").innerHTML = aboveBelow;
-    document.querySelector(".minus-birth-year-2010").innerHTML = 2010 - this.state.birthYear;
+    // document.querySelector(".mean-year").innerHTML = mean;
+    // document.querySelector(".above-below").innerHTML = aboveBelow;
+    // document.querySelector(".minus-birth-year-2010").innerHTML = 2010 - this.state.birthYear;
 
     console.log(mean);
   }
