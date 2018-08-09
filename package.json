@@ -7,7 +7,7 @@
   "contributors": [
     "Joshua Byrd <phocks@gmail.com>"
   ],
-  "aunty": "preact-app",
+  "aunty": "preact",
   "scripts": {
     "start": "aunty serve",
     "test": "jest"
