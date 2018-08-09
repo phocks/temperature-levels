@@ -11,11 +11,16 @@ const monthlyGlobalTemps = require("../monthly_global_temps_json.json");
 // Import all the Components
 const Age = require("./Age");
 
+
 let calculatedBirthEra = "nineties";
 
 class App extends Component {
   constructor(props) {
     super(props);
+
+    // Some class constants
+    this.maxBirthYear = 2009;
+    this.minBirthYear = 1900;
 
     // set some default states
     this.state = {
@@ -50,8 +55,8 @@ class App extends Component {
 
   handleAgeChange(year) {
     // Set some bounds on the birth year
-    if (year < 1900) year = 1900;
-    if (year > 2016) year = 2016;
+    if (year < this.minBirthYear) year = this.minBirthYear;
+    if (year > this.maxBirthYear) year = this.maxBirthYear;
 
     // Set Era age brackets
     if (year >= 2010) calculatedBirthEra = "tens";

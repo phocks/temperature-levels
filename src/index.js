@@ -39,35 +39,48 @@ function init() {
   );
 }
 
-// xhr({ url: root.getAttribute('data-content-url') }, (err, response, body) => {
-//   const doc = new DOMParser().parseFromString(body, 'text/html');
-//   const startNode = doc.querySelector('a[name="content"]');
-//   const endNode = doc.querySelector('a[name="endcontent"]');
+// Fetch another CoreMedia article and parse it for dynamic use
+xhr({ url: root.getAttribute("data-content-url") }, (err, response, body) => {
+  const doc = new DOMParser().parseFromString(body, "text/html");
+  const startNode = doc.querySelector('a[name="content"]');
+  const endNode = doc.querySelector('a[name="endcontent"]');
 
-//   if (!startNode || !endNode) {
-//     console.error(new Error('No content bookends found in document.'));
+  if (!startNode || !endNode) {
+    console.error(new Error("No content bookends found in document."));
 
-//     return init();
-//   }
+    return init();
+  }
 
-//   let currentNode = startNode;
-//   let currentSection;
+  let currentNode = startNode;
+  let currentSection;
 
-//   while (((currentNode = currentNode.nextSibling), currentNode && currentNode !== endNode)) {
-//     if (!currentNode.tagName || (currentNode.tagName === 'P' && currentNode.textContent.trim().length === 0)) {
-//       // Skip non-elements & empty paragraphs
-//     } else if (currentNode.tagName === 'A' && currentNode.getAttribute('name').length > 0) {
-//       // Set currentSection to tag's name attribute, and create a key on content if it doesn't exist
-//       currentSection = currentNode.getAttribute('name');
-//       content[currentSection] = content[currentSection] || [];
-//     } else if (currentSection) {
-//       // Append element to content's currentSection
-//       content[currentSection].push(currentNode);
-//     }
-//   }
+  while (
+    ((currentNode = currentNode.nextSibling),
+    currentNode && currentNode !== endNode)
+  ) {
+    if (
+      !currentNode.tagName ||
+      (currentNode.tagName === "P" &&
+        currentNode.textContent.trim().length === 0)
+    ) {
+      // Skip non-elements & empty paragraphs
+    } else if (
+      currentNode.tagName === "A" &&
+      currentNode.getAttribute("name").length > 0
+    ) {
+      // Set currentSection to tag's name attribute, and create a key on content if it doesn't exist
+      currentSection = currentNode.getAttribute("name");
+      content[currentSection] = content[currentSection] || [];
+    } else if (currentSection) {
+      // Append element to content's currentSection
+      content[currentSection].push(currentNode);
+    }
+  }
 
-//   init();
-// });
+  console.log(content);
+
+  // init();
+});
 
 if (module.hot) {
   module.hot.accept("./components/App", () => {
