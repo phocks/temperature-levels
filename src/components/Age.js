@@ -20,8 +20,6 @@ class Age extends Component {
   // }
 
   handleMouseDown(event) {
-    // console.log(event);
-    console.log(this.props.mousePosX, this.props.mousePosY);
     this.props.onSlideYear(event);
   }
 

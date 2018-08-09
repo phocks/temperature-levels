@@ -170,11 +170,11 @@ class App extends Component {
     } else mean = "(no data)";
 
     // Search out classes is change HTML content
-    // document.querySelector(".mean-year").innerHTML = mean;
-    // document.querySelector(".above-below").innerHTML = aboveBelow;
-    // document.querySelector(".minus-birth-year-2010").innerHTML = 2010 - this.state.birthYear;
+    document.querySelector(".mean-year").innerHTML = mean;
+    document.querySelector(".above-below").innerHTML = aboveBelow;
+    document.querySelector(".minus-birth-year-2010").innerHTML = 2010 - this.state.birthYear;
 
-    console.log(mean);
+    // console.log(mean);
   }
 
   render(props, state) {
