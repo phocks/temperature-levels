@@ -5,7 +5,7 @@ const xhr = require("xhr");
 const PROJECT_NAME = "interactive-temperature-records";
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 
-// let content = {}; // Using xhr to get a CoreMedia page
+let content = {}; // Using xhr to get a CoreMedia page
 
 // Fetch html from external html and inject in page
 axios
