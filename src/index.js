@@ -1,17 +1,15 @@
 const { h, render } = require("preact");
 const axios = require("axios"); // Maybe use xhr instead
-const xhr = require('xhr');
+const xhr = require("xhr");
 
 const PROJECT_NAME = "interactive-temperature-records";
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 
-let content = {};
+// let content = {}; // Using xhr to get a CoreMedia page
 
 // Fetch html from external html and inject in page
 axios
-  .get(
-    "https://raw.githubusercontent.com/TLes/temprecord/master/script.html"
-  )
+  .get("https://raw.githubusercontent.com/TLes/temprecord/master/script.html")
   .then(response => {
     const injectHtml = response.data;
     const injectionRoot = document.querySelector(`[name="fullscript"]`);
@@ -34,8 +32,11 @@ axios
 
 function init() {
   const App = require("./components/App");
-  console.log(content);
-  render(<App content={content} projectName={PROJECT_NAME} />, root, root.firstChild);
+  render(
+    <App content={content} projectName={PROJECT_NAME} />,
+    root,
+    root.firstChild
+  );
 }
 
 // xhr({ url: root.getAttribute('data-content-url') }, (err, response, body) => {
@@ -67,7 +68,6 @@ function init() {
 
 //   init();
 // });
-
 
 if (module.hot) {
   module.hot.accept("./components/App", () => {

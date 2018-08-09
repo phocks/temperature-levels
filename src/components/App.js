@@ -7,7 +7,6 @@ const Portal = require("preact-portal");
 
 // Directly import data for now
 const monthlyGlobalTemps = require("../monthly_global_temps_json.json");
-console.log(monthlyGlobalTemps);
 
 // Import all the Components
 const Age = require("./Age");
@@ -173,8 +172,6 @@ class App extends Component {
     document.querySelector(".mean-year").innerHTML = mean;
     document.querySelector(".above-below").innerHTML = aboveBelow;
     document.querySelector(".minus-birth-year-2010").innerHTML = 2010 - this.state.birthYear;
-
-    // console.log(mean);
   }
 
   render(props, state) {

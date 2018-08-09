@@ -17,7 +17,6 @@ class Form extends Component {
 
   handleChange(event) {
     event.preventDefault();
-    // console.log(event);
     this.props.onAgeChange(event.target.value);
   }
 
