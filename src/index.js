@@ -4,13 +4,10 @@ const xhr = require("xhr");
 const PROJECT_NAME = "interactive-temperature-records";
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 
-let content = {}; // Using xhr to get a CoreMedia page
-
 function init() {
-  console.log(window.__ODYSSEY__.utils.misc.smartquotes);
   const App = require("./components/App");
   render(
-    <App content={content} projectName={PROJECT_NAME} />,
+    <App projectName={PROJECT_NAME} />,
     root,
     root.firstChild
   );
@@ -56,6 +53,7 @@ xhr({ url: root.getAttribute("data-content-url") }, (err, response, body) => {
     parent.removeChild(injectionRoot);
   }
 
+  // Wait for Odyssey
   if (window.__ODYSSEY__) {
     transform();
   } else {
