@@ -1,6 +1,11 @@
 const { h, render } = require("preact");
 const xhr = require("xhr");
 
+// Test gemini module
+const gemini = require("./lib/gemini.umd.js");
+
+gemini();
+
 const PROJECT_NAME = "interactive-temperature-records";
 const root = document.querySelector(`[data-${PROJECT_NAME}-root]`);
 
