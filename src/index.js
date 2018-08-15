@@ -1,8 +1,11 @@
 const { h, render } = require("preact");
-const xhr = require("xhr");
+// const xhr = require("xhr");
 
 // Test gemini module
-const gemini = require("./lib/gemini.umd.js");
+// const gemini = require("./lib/gemini.umd");
+import gemini from "gemini";
+
+console.log(gemini)
 
 gemini();
 
@@ -19,52 +22,52 @@ function init() {
 }
 
 // Fetch another CoreMedia article and parse it for dynamic use
-xhr({ url: root.getAttribute("data-content-url") }, (err, response, body) => {
-  function transform() {
-    const doc = new DOMParser().parseFromString(body, "text/html");
-    const startNode = doc.querySelector('a[name="content"]');
-    const endNode = doc.querySelector('a[name="endcontent"]');
+// xhr({ url: root.getAttribute("data-content-url") }, (err, response, body) => {
+//   function transform() {
+//     const doc = new DOMParser().parseFromString(body, "text/html");
+//     const startNode = doc.querySelector('a[name="content"]');
+//     const endNode = doc.querySelector('a[name="endcontent"]');
 
-    if (!startNode || !endNode) {
-      console.error(new Error("No content bookends found in document."));
+//     if (!startNode || !endNode) {
+//       console.error(new Error("No content bookends found in document."));
 
-      return init();
-    }
+//       return init();
+//     }
 
-    let currentNode = startNode;
-    const injectionRoot = document.querySelector('[name="fullscript"]');
+//     let currentNode = startNode;
+//     const injectionRoot = document.querySelector('[name="fullscript"]');
 
-    let fetchedNodes = [];
+//     let fetchedNodes = [];
 
-    while (
-      ((currentNode = currentNode.nextSibling),
-      currentNode && currentNode !== endNode)
-    ) {
-      fetchedNodes.push(currentNode);
-    }
+//     while (
+//       ((currentNode = currentNode.nextSibling),
+//       currentNode && currentNode !== endNode)
+//     ) {
+//       fetchedNodes.push(currentNode);
+//     }
 
-    fetchedNodes.forEach(node => {
-      // Use Odyssey API to re-apply smart quotes
-      window.__ODYSSEY__.utils.misc.smartquotes(node);
+//     fetchedNodes.forEach(node => {
+//       // Use Odyssey API to re-apply smart quotes
+//       window.__ODYSSEY__.utils.misc.smartquotes(node);
 
-      // Append fetched content
-      injectionRoot.appendChild(node);
-    });
+//       // Append fetched content
+//       injectionRoot.appendChild(node);
+//     });
 
-    // Unwraps injected content from parent
-    var parent = injectionRoot.parentNode;
-    while (injectionRoot.firstChild)
-    parent.insertBefore(injectionRoot.firstChild, injectionRoot);
-    parent.removeChild(injectionRoot);
-  }
+//     // Unwraps injected content from parent
+//     var parent = injectionRoot.parentNode;
+//     while (injectionRoot.firstChild)
+//     parent.insertBefore(injectionRoot.firstChild, injectionRoot);
+//     parent.removeChild(injectionRoot);
+//   }
 
-  // Wait for Odyssey
-  if (window.__ODYSSEY__) {
-    transform();
-  } else {
-    window.addEventListener("odyssey:api", transform);
-  }
-});
+//   // Wait for Odyssey
+//   if (window.__ODYSSEY__) {
+//     transform();
+//   } else {
+//     window.addEventListener("odyssey:api", transform);
+//   }
+// });
 
 if (module.hot) {
   module.hot.accept("./components/App", () => {
