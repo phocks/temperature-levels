@@ -29,7 +29,7 @@
     "preact-render-to-string": "^3.8.0"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "preact": "^8.3.0",
     "preact-compat": "^3.18.2",
     "preact-portal": "^1.1.3",
